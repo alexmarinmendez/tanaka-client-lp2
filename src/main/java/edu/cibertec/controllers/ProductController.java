@@ -22,6 +22,13 @@ public class ProductController {
 		this.restTemplate = restTemplateBuilder.rootUri("").build();
 	}
 	
+	@GetMapping("/")
+	public String findAll(Model model) {
+		ResponseEntity<ProductDTO[]> products = this.restTemplate.getForEntity(this.apiUrl, ProductDTO[].class);
+		model.addAttribute("productos", products.getBody());
+		return "productos";
+	}
+	
 	@GetMapping("/{id}")
 	public String findById(@PathVariable Long id, Model model) {
 		ResponseEntity<ProductDTO> product = this.restTemplate.getForEntity(this.apiUrl + '/' + id, ProductDTO.class);
