@@ -46,9 +46,10 @@ public class ProductController {
 	@PostMapping("/grabar")
 	public String save(ProductDTO productDTO, Model model) {
 		this.restTemplate.postForEntity(this.apiUrl, productDTO, ProductDTO.class);
-		ResponseEntity<ProductDTO[]> products = this.restTemplate.getForEntity(this.apiUrl, ProductDTO[].class);
-		model.addAttribute("productos", products.getBody());
-		return "productos";
+//		ResponseEntity<ProductDTO[]> products = this.restTemplate.getForEntity(this.apiUrl, ProductDTO[].class);
+//		model.addAttribute("productos", products.getBody());
+//		return "productos";
+		return "redirect:/";
 	}
 	
 }
