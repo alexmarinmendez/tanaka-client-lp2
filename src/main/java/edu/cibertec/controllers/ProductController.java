@@ -42,6 +42,7 @@ public class ProductController {
 		model.addAttribute("producto", new ProductDTO());
 		model.addAttribute("titulo", "Agregar nuevo producto");
 		model.addAttribute("accion", "/grabar");
+		model.addAttribute("textoBoton", "Grabar");
 		return "formulario-nuevo";
 	}
 	
@@ -61,6 +62,7 @@ public class ProductController {
 		model.addAttribute("producto", product.getBody());
 		model.addAttribute("titulo", "Editar producto");
 		model.addAttribute("accion", "/actualizar");
+		model.addAttribute("textoBoton", "Editar datos");
 		return "formulario-nuevo";
 	}
 	
@@ -77,6 +79,7 @@ public class ProductController {
 		model.addAttribute("producto", product.getBody());
 		model.addAttribute("titulo", "Eliminar producto");
 		model.addAttribute("accion", "/borrar/" + product.getBody().getId());
+		model.addAttribute("textoBoton", "Eliminar");
 		return "formulario-nuevo";
 	}
 	
