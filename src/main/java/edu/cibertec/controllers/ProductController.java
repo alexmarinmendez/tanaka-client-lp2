@@ -69,4 +69,21 @@ public class ProductController {
 		this.restTemplate.put(this.apiUrl + '/' + productDTO.getId(), productDTO);
 		return "redirect:/";
 	}
+	
+	
+	@GetMapping("/eliminar/{id}")
+	public String showFormToDelete(@PathVariable Long id, Model model) {
+		ResponseEntity<ProductDTO> product = this.restTemplate.getForEntity(this.apiUrl + '/' + id, ProductDTO.class);
+		model.addAttribute("producto", product.getBody());
+		model.addAttribute("titulo", "Eliminar producto");
+		model.addAttribute("accion", "/borrar/" + product.getBody().getId());
+		return "formulario-nuevo";
+	}
+	
+	@PostMapping("/borrar/{id}")
+	public String delete(@PathVariable Long id) {
+		this.restTemplate.delete(this.apiUrl + '/' + id);
+		return "redirect:/";
+	}
+	
 }
