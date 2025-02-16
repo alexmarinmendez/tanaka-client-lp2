@@ -40,6 +40,8 @@ public class ProductController {
 	@GetMapping("/nuevo")
 	public String showFormToRegister(Model model) {
 		model.addAttribute("producto", new ProductDTO());
+		model.addAttribute("titulo", "Agregar nuevo producto");
+		model.addAttribute("accion", "/grabar");
 		return "formulario-nuevo";
 	}
 	
@@ -52,4 +54,19 @@ public class ProductController {
 		return "redirect:/";
 	}
 	
+	
+	@GetMapping("/editar/{id}")
+	public String showFormToEdit(@PathVariable Long id, Model model) {
+		ResponseEntity<ProductDTO> product = this.restTemplate.getForEntity(this.apiUrl + '/' + id, ProductDTO.class);
+		model.addAttribute("producto", product.getBody());
+		model.addAttribute("titulo", "Editar producto");
+		model.addAttribute("accion", "/actualizar");
+		return "formulario-nuevo";
+	}
+	
+	@PostMapping("/actualizar")
+	public String update(ProductDTO productDTO) {
+		this.restTemplate.put(this.apiUrl + '/' + productDTO.getId(), productDTO);
+		return "redirect:/";
+	}
 }
